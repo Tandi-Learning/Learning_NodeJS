@@ -14,7 +14,8 @@
   "author": "Tandi Sunarto",
   "license": "MIT",
   "devDependencies": {
-    "webpack": "^2.2.1"
+    "webpack": "^2.3.3",
+    "webpack-dev-server": "^2.4.2"
   },
   "dependencies": {
     "jquery": "^3.1.1"
