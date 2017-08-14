@@ -1,17 +1,28 @@
 var task = require('./task');
-var notificationService = require('./observers');
-var loggingService = require('./observers');
-var auditingService = require('./observers');
 
-var task_1 = new task(
+var observableTask = require('./observable-task')
+
+var notificationService = require('./observer-services');
+var auditingService = require('./observer-services');
+var loggingService = require('./observer-services');
+
+var myTask = new observableTask(
     {
         name: 'create a demo for constructors',
         user: 'john'
     });
 
-var ns = new notificationService();
-var ls = new loggingService();
-var as = new auditingService();
 
+var notificationSvc = notificationService;
+var loggingSvc = loggingService;
+var auditingSvc = auditingService;
 
-task_1.save();
+myTask.addObserver(notificationSvc.update);
+myTask.addObserver(loggingSvc.update);
+myTask.addObserver(auditingSvc.update);
+
+myTask.save();
+
+// myTask.removeObserver(auditingSvc.update);
+
+// myTask.save();
