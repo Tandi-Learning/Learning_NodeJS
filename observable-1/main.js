@@ -2,9 +2,7 @@ var task = require('./task');
 
 var observableTask = require('./observable-task')
 
-var notificationService = require('./observer-services');
-var auditingService = require('./observer-services');
-var loggingService = require('./observer-services');
+var services = require('./observer-services');
 
 var myTask = new observableTask(
     {
@@ -13,9 +11,9 @@ var myTask = new observableTask(
     });
 
 
-var notificationSvc = notificationService;
-var loggingSvc = loggingService;
-var auditingSvc = auditingService;
+var notificationSvc = new services.notificationService();
+var loggingSvc = new services.loggingService();
+var auditingSvc = new services.auditingService();
 
 myTask.addObserver(notificationSvc.update);
 myTask.addObserver(loggingSvc.update);
@@ -23,6 +21,6 @@ myTask.addObserver(auditingSvc.update);
 
 myTask.save();
 
-// myTask.removeObserver(auditingSvc.update);
+myTask.removeObserver(auditingSvc.update);
 
-// myTask.save();
+myTask.save();
